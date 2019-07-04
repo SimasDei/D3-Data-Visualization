@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import PageHome from '@/pages/PageHome.vue';
 import Lesson1 from '@/pages/Lesson1.vue';
+import Lesson2 from '@/pages/Lesson2.vue';
 
 Vue.use(Router);
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/lesson1',
       name: 'Lesson1',
       component: Lesson1,
+    },
+    {
+      path: '/lesson2',
+      name: 'Lesson2',
+      component: Lesson2,
     },
   ],
 });
