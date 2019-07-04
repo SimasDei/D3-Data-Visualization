@@ -8,9 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@nextindex/next-scss": "^1.2.1",
+    "axios": "^0.19.0",
+    "chart.js": "^2.8.0",
     "core-js": "^2.6.5",
     "d3": "^5.9.7",
+    "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
+    "vue-chartjs": "^3.4.2",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },
@@ -35,7 +40,9 @@
       "plugin:vue/essential",
       "@vue/airbnb"
     ],
-    "rules": {},
+    "rules": {
+      "max-len": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

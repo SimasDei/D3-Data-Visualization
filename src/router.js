@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import PageHome from '@/pages/PageHome.vue';
+// import PageHome from '@/pages/PageHome.vue';
+import Start from '@/pages/Start.vue';
 import Lesson1 from '@/pages/Lesson1.vue';
 import Lesson2 from '@/pages/Lesson2.vue';
 
@@ -13,8 +14,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'PageHome',
-      component: PageHome,
+      name: 'Start',
+      component: Start,
     },
     {
       path: '/lesson1',
