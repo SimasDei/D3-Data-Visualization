@@ -34,7 +34,7 @@
 <script>
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
-import moment from 'moment';
+import { dateToDay, dateBeautify } from '@/utils/dateFormatter';
 
 import LineChart from '@/components/LineChart.vue';
 
@@ -49,8 +49,11 @@ export default {
       pack: null,
       packageName: '',
       loaded: false,
+      rawData: null,
       downloads: [],
+      downloadYear: [],
       labels: [],
+      labelsYear: [],
       showError: false,
       errorMessage: 'Please enter a package name',
       periodStart: '',
@@ -64,28 +67,38 @@ export default {
     }
   },
   computed: {
-    endDate() {
-      return moment(this.periodEnd).format('YYYY-MM-DD');
-    },
     startDate() {
-      return moment(this.periodStart).format('YYYY-MM-DD');
+      return dateToDay(this.periodStart);
+    },
+    endDate() {
+      return dateToDay(this.periodEnd);
     },
     period() {
       return this.periodStart ? `${this.startDate}:${this.endDate}` : 'last-month';
     },
+    formattedPeriod() {
+      return this.periodStart
+        ? `${dateBeautify(this.startDate)} - ${dateBeautify(this.endDate)}`
+        : 'last-month';
+    },
   },
   methods: {
     requestData() {
-      if (!this.pack) {
+      if (this.pack === null || this.pack === '' || this.pack === 'undefined') {
         this.showError = true;
+        this.loading = false;
         return;
       }
+      this.resetState();
       axios
         .get(`https://api.npmjs.org/downloads/range/${this.period}/${this.pack}`)
         .then((res) => {
+          this.rawData = res.data.downloads;
           this.downloads = res.data.downloads.map(download => download.downloads);
           this.labels = res.data.downloads.map(download => download.day);
           this.packageName = res.data.package;
+          this.formatYear();
+          this.setUrl();
           this.loaded = true;
         })
         .catch((err) => {
