@@ -1,14 +1,11 @@
-<template>
-  <h1>Line Chart</h1>
-</template>
-
 <script>
 import { Line } from 'vue-chartjs';
 
 export default {
+  extends: Line,
   props: {
     chartData: {
-      type: Array,
+      type: Array || Object,
       required: false,
     },
     chartLabels: {
@@ -22,7 +19,9 @@ export default {
         scales: {
           yAxes: [
             {
-              ticks: { beginAtZero: true },
+              ticks: {
+                beginAtZero: true,
+              },
               gridLines: {
                 display: true,
               },
@@ -30,7 +29,9 @@ export default {
           ],
           xAxes: [
             {
-              gridLines: { display: false },
+              gridLines: {
+                display: false,
+              },
             },
           ],
         },
@@ -43,18 +44,24 @@ export default {
     };
   },
   mounted() {
-    this.renderChart({
-      labels: 'downloads',
-      borderColor: '#249ebf',
-      pointBackgroundColor: 'white',
-      borderWidth: 1,
-      pointBorderColor: '#239ebf',
-      backgroundColor: 'transparent',
-      data: this.chartData,
-    });
+    this.renderChart(
+      {
+        labels: this.chartLabels,
+        datasets: [
+          {
+            label: 'downloads',
+            borderColor: '#48CFAE',
+            pointBackgroundColor: '#48CFAE',
+            borderWidth: 1,
+            pointBorderColor: '#48CFAE',
+            pointColor: '#48CFAE',
+            backgroundColor: 'transparent',
+            data: this.chartData,
+          },
+        ],
+      },
+      this.options,
+    );
   },
 };
 </script>
-
-<style>
-</style>

@@ -18,6 +18,11 @@ export default new Router({
       component: Start,
     },
     {
+      path: '/:package',
+      name: 'Package',
+      component: Start,
+    },
+    {
       path: '/lesson1',
       name: 'Lesson1',
       component: Lesson1,
