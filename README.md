@@ -1,4 +1,4 @@
-# d3-data-visualization
+## d3-data-visualization
 
 ## Project setup
 ```
